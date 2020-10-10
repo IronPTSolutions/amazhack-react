@@ -1,19 +1,43 @@
-import './App.css';
-import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import Login from './components/login/Login';
-import ProductList from './components/product-list/ProductList';
+import "./App.scss";
+import React, { useState } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import Login from "./components/login/Login";
+import Header from "./components/header/Header";
+import ProductList from "./components/product-list/ProductList";
+import AuthenticatedRoute from "./components/authenticated-route/AuthenticatedRoute";
 
 function App() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  const onLogIn = (loggedInUser) => {
+    localStorage.setItem("user", JSON.stringify(loggedInUser));
+    setUser(loggedInUser);
+  };
+
+  const onLogOut = () => {
+    localStorage.removeItem("user");
+    setUser(undefined);
+  };
+
   return (
     <div className="App">
-      {/* We want a header that will appear in every screen */}
-      <Switch>
-        <Route path="/products" component={ProductList} />{" "}
-        {/* We don't wan't non-authenticated users to access the previous route! */}
-        <Route path="/" component={Login} />
-        <Redirect to="/products" />
-      </Switch>
+      <Header user={user} onLogOut={onLogOut} />
+      <div className="App__screenWrapper">
+        <Switch>
+          <AuthenticatedRoute
+            path="/products"
+            render={(props) => <ProductList {...props} user={user} onLogOut={onLogOut} />}
+            user={user}
+          />
+          <Route
+            path="/login"
+            render={(props) => (
+              <Login {...props} user={user} onLogIn={onLogIn} />
+            )}
+          />
+          <Redirect to="/products" />
+        </Switch>
+      </div>
     </div>
   );
 }

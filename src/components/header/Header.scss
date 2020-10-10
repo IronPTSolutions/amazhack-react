@@ -1,0 +1,23 @@
+@import "../../colors";
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px 0 50px;
+  color: white;
+  background-color: $primary;
+  position: fixed;
+  width: 100vw;
+  box-sizing: border-box;
+  height: 36px;
+
+  &__userInfo {
+    &__name {
+      margin-right: 15px;
+    }
+
+    display: flex;
+	align-items: center;
+  }
+}
