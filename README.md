@@ -58,7 +58,7 @@ I recommend that you follow the following order:
 3. Create the `Navbar` component that receives this user as a prop and renders conditionally depending on it
 4. Create an authentication guard for our routes. Here's how it should be used:
 	```jsx
-	<AuthenticatedRoute to="/myAuthenticatedRoute" user={user} component={MyAuthenticatedComponent}/>
+	<AuthenticatedRoute path="/myAuthenticatedRoute" user={user} component={MyAuthenticatedComponent}/>
 	```
 5. Use it for the `/product` route
 6. Finish the `ProductList` component
