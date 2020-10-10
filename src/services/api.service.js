@@ -11,4 +11,6 @@ export const getProducts = () => {
   return axios.get("/product").then((res) => res.data);
 };
 
-// Add whatever API calls you need here
+export const logOut = () => {
+  return axios.get("/logout").then((res) => res.data);
+};
