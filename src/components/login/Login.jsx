@@ -3,8 +3,12 @@ import React, { useState } from "react";
 import InputWithLabel from "./input-with-label/InputWithLabel";
 import { login } from "../../services/api.service";
 import { Redirect } from "react-router-dom";
+import Button from '@material-ui/core/Button';
 
-export default function Login({user, logIn}) {
+
+
+
+export default function Login({ user, logIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -38,7 +42,12 @@ export default function Login({user, logIn}) {
           onChange={(e) => setPassword(e.target.value)}
           type="password"
         />
-        <button type="submit">Log in</button>
+        <div className='pt-3'>
+          <Button variant="contained" color="primary" type='submit'>
+            Login
+      </Button>
+        </div>
+
       </form>
     </div>
   );

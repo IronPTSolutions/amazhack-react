@@ -38,6 +38,7 @@ export default function ProductList({logOut}) {
           image={product.image}
           price={product.price}
           user={product.user}
+          description={product.description}
         />
         )  
       })}
