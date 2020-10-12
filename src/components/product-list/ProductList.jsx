@@ -2,6 +2,15 @@ import "./ProductList.css";
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../../services/api.service";
 import ProductCard from "./product-card/ProductCard";
+import { css } from "@emotion/core";
+import RingLoader from "react-spinners/RingLoader";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: aquamarine;
+  margin-top: 200px;
+`;
 
 export default function ProductList({logOut}) {
   const [productList, setProductList] = useState([]);
@@ -10,7 +19,7 @@ export default function ProductList({logOut}) {
   useEffect(() => {
    getProducts()
    .then(products => {
-     setProductList(products)
+     (setProductList(products))
      console.log(products)
    })
    .catch((e) => {
@@ -27,7 +36,13 @@ export default function ProductList({logOut}) {
   }
 
   if (productList.length === 0) {
-    return <div>Loading...</div>;
+    return (<div>
+       <RingLoader
+          css={override}
+          size={150}
+          color={"pink"}
+        />
+    </div>);
   } else {
     return <div className="ProductList ">
       {productList.map(product => {
