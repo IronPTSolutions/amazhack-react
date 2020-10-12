@@ -4,40 +4,37 @@ import { getOneProduct } from "../../../../services/api.service";
 import { Redirect } from "react-router-dom";
 
 export default function ViewDetails(props) {
-    const [productDetails, setProduct] = useState(undefined);
-    const [error, setError] = useState();
+    const [productDetails, setProduct] = useState([]);
+    const [error, setError] = useState();    
+
 
     useEffect(() => {
         getOneProduct(props.match.params.id)
-          .then((product) => setProduct(product))
-          .catch((e) => {
-            if (e.response.status === 401) {
-              console.log("not working");
-            } else {
-              setError(true);
-            }
-          });
-      }, []);
+          .then((product) => {
+            setProduct(product)
+          })
+          .catch((error) => console.log(error))
+      },);
 
       if (!props.user) {
         return <Redirect to="/login" />;
       }
 
-      if (productDetails === undefined) {
+      if (productDetails === []) {
         return <div>Loading...</div>;
       } else {
   return (
     <div className="ProductCard">
-      <div class="card">
+      <div className="card">
         <div
-          class="card-img-top"
+          className="card-img-top"
           style={{ background: `url(${productDetails.image})`, height: `100px` }}
         ></div>
-        <div class="card-body">
-          <h5 class="card-title">{productDetails.name}</h5>
-          <p class="card-text">{productDetails.price}</p>
-          <p class="card-text">{productDetails.user}</p>
-          <p class="card-text">{productDetails.description}</p>
+        <div className="card-body">
+          <h5 className="card-title">{productDetails.name}</h5>
+          <p className="card-text">{productDetails.price}</p>
+          <p className="card-text">{productDetails.user}</p>
+          <p className="card-text">{productDetails.description}</p>
         </div>
       </div>
     </div>

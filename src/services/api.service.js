@@ -10,9 +10,7 @@ export const login = (email, password) => {
 export const getOneProduct = (id) => {
   return axios
   .get(`/product/${id}`)
-  .then((response) => {
-    console.log(response);
-  })
+  .then((response) => response.data)
   .catch(e => e);
 };
 
