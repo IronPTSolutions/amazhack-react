@@ -6,6 +6,12 @@ import ProductList from './components/product-list/ProductList';
 import AuthenticatorRouter from './components/authenticator/AuthenticatorRouter'
 import Header from './components/header/Header';
 import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
+import ProductDetail from './components/product-list/product-card/ProductDetail';
+
+//TODO: 
+// Alinear todas las tarjetas
+// Usuario detalle
+// Favs
 
 
 
@@ -31,6 +37,7 @@ function App() {
 
       <Switch>
         <AuthenticatorRouter path="/products" user={user} render={(props) => <ProductList {...props} user={user} logOut={loggedOut} />} />
+        <AuthenticatorRouter path="/detail/:id" user={user} render={(props) => <ProductDetail {...props} user={user} logOut={loggedOut} />} />
 
         <Route path="/login" render={(props) => <Login {...props} user={user} logIn={loggedIn} />} />
 

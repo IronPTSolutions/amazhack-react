@@ -11,4 +11,6 @@ export const getProducts = () => {
   return axios.get("/product").then((res) => res.data);
 };
 
-// Add whatever API calls you need here
+export function getDetail(id) {
+  return axios.get(`/detail/${id}`).then((res) => res.data);
+}

@@ -35,12 +35,11 @@ export default function Header(props) {
           </Typography>
           {u ? (
             <div>
-              <p>el usuario: {u.email}</p>
+              <p>Hi, {u.email.split('@')[0]}!</p>
               <Button color="inherit" onClick={props.logOut}>Log Out</Button>
             </div>
           ) : (
             <div>
-
               <Button color="inherit" onClick={props.logIn}>Login</Button>
             </div>
           )}

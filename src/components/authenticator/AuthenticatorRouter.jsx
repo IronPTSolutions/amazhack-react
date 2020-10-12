@@ -5,13 +5,10 @@ export default function AuthenticatorRouter(props) {
     console.log('authent') 
     console.log(props) 
    const {user} = props
-    if (!user) {
-        console.log('if')
-       
+    if (!user) { 
        return  <Redirect to="/login" />
        
     } else {
-
         return <Route {...props} />
     }
 

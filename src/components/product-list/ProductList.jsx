@@ -19,8 +19,7 @@ export default function ProductList({logOut}) {
   useEffect(() => {
    getProducts()
    .then(products => {
-     (setProductList(products))
-     console.log(products)
+     setProductList(products)
    })
    .catch((e) => {
      if (e.response.status === 401) {
@@ -49,6 +48,7 @@ export default function ProductList({logOut}) {
         return (
           <ProductCard 
           key={product.id}
+          id={product.id}
           name={product.name}
           image={product.image}
           price={product.price}
