@@ -1,0 +1,4 @@
+.nonStyle {
+    list-style: none;
+    border: 0.5px solid rgb(197, 191, 191);
+}

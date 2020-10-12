@@ -1,0 +1,7 @@
+.ViewDetails {
+    width: 80%;
+    margin: 10px 60px 0 100px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
