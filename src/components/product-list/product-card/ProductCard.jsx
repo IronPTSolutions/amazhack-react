@@ -39,7 +39,7 @@ export const ProductCard = React.memo(function ProductCard(props) {
       <CardContent>
          <TextInfoContent
            classes={textCardContentStyles}
-           overline={`${Math.floor(props.price) } €`}
+           overline={`${Math.floor(props.price).toFixed(2) } €`}
            heading={props.name}
            body={props.description}
          />

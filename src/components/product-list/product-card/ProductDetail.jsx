@@ -11,6 +11,9 @@ import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoConten
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import RingLoader from "react-spinners/RingLoader";
 
+import Review from '../reviews/Review';
+import { Avatar, ListItemText } from '@material-ui/core';
+
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 343,
@@ -33,11 +36,26 @@ const useStyles = makeStyles(() => ({
 
 export const ProductDetail = React.memo(function ProductDetail(props) {
   const styles = useStyles();
+
   const mediaStyles = useFourThreeCardMediaStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
   const shadowStyles = useOverShadowStyles({ inactive: true });
   const [productDetail, setProductDetail] = useState([]);
   const [error, setError] = useState();
+
+
+
+  const useStylesList = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      maxWidth: '36ch',
+      backgroundColor: theme.palette.background.paper,
+    },
+    inline: {
+      display: 'inline',
+    },
+  }));
+
 
   useEffect(() => {
 
@@ -58,6 +76,9 @@ export const ProductDetail = React.memo(function ProductDetail(props) {
       })
   }, []);
 
+  const revScoresrRounded = productDetail.reviews
+  console.log('revScore', revScoresrRounded)
+
   if (error) {
     return <div>There was an error sending the request</div>;
   }
@@ -71,23 +92,44 @@ export const ProductDetail = React.memo(function ProductDetail(props) {
       />
     </div>);
   } else {
+
     return (
-      <Card className={cx(styles.root, shadowStyles.root)}>
-        <CardMedia
-          className={cx(styles.media, mediaStyles.root)}
-          image={productDetail.image}
-        />
-
-        <CardContent>
-          <TextInfoContent
-            classes={textCardContentStyles}
-            overline={`${Math.floor(productDetail.price)} €`}
-            heading={productDetail.name}
-            body={productDetail.description}
-          />
-        </CardContent>
-      </Card>
-
+      <div className='container'>
+        <div className='row'>
+          <div className='col-6'>
+            <h3>Product:</h3>
+            <Card className={cx(styles.root, shadowStyles.root)}>
+              <CardMedia
+                className={cx(styles.media, mediaStyles.root)}
+                image={productDetail.image}
+              />
+              <CardContent>
+                <TextInfoContent
+                  classes={textCardContentStyles}
+                  overline={`${Math.floor(productDetail.price)} €`}
+                  heading={productDetail.name}
+                  body={productDetail.description}
+                />
+                <hr/>
+                <div className='d-flex'>
+                  <Avatar alt="Remy Sharp" src={productDetail.user.image} />
+                  <span className='p-2'>Seller: {productDetail.user.name}</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+          <div className='col-6'>
+            <h3>Reviews:</h3>
+            {productDetail.reviews.map(el => {
+              return (
+                <div>
+                  <Review title={el.title} description={el.description} score={el.score} image={el.user.image} />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
     );
   }
 })
