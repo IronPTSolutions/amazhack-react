@@ -1,3 +1,11 @@
-.Header{
-	
+.navbar{
+    color:white;
+    text-decoration: none; 
+    margin-bottom: 10px;
+}
+
+.navbarDisplay{
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
 }

@@ -7,6 +7,15 @@ export const login = (email, password) => {
   return axios.post("/login", { email, password }).then((res) => res.data);
 };
 
+export const getOneProduct = (id) => {
+  return axios
+  .get(`/product/${id}`)
+  .then((response) => {
+    console.log(response);
+  })
+  .catch(e => e);
+};
+
 export const getProducts = () => {
   return axios.get("/product").then((res) => res.data);
 };
