@@ -76,9 +76,16 @@ export const ProductDetail = React.memo(function ProductDetail(props) {
       })
   }, []);
 
-  const revScoresrRounded = productDetail.reviews
-  console.log('revScore', revScoresrRounded)
+  
+  
+  
 
+  // setRevScore(old => {
+  //   revScore = revScore.score.reduce((a,b) =>  a + b)
+  // })
+  
+  
+  // console.log(revScore)
   if (error) {
     return <div>There was an error sending the request</div>;
   }
@@ -92,7 +99,12 @@ export const ProductDetail = React.memo(function ProductDetail(props) {
       />
     </div>);
   } else {
-
+    let revScoresRounded = productDetail.reviews.reduce((a,cv) => {
+      return (( (a + cv.score) / (productDetail.reviews.length -1)) * 2)
+    }, 0)
+    
+    console.log('revScore', revScoresRounded)
+    console.log(productDetail.reviews.length)
     return (
       <div className='container'>
         <div className='row'>
@@ -114,6 +126,10 @@ export const ProductDetail = React.memo(function ProductDetail(props) {
                 <div className='d-flex'>
                   <Avatar alt="Remy Sharp" src={productDetail.user.image} />
                   <span className='p-2'>Seller: {productDetail.user.name}</span>
+                  <div className='d-flex flex-column justify-content-center text-center'>
+                    <Avatar src="https://upload.wikimedia.org/wikipedia/commons/4/44/Plain_Yellow_Star.png" />
+                    <span>Rate Media: {revScoresRounded.toFixed(2)}</span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
