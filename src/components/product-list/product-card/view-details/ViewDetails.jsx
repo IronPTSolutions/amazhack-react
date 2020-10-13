@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import Reviews from "./reviews/Reviews";
 
 export default function ViewDetails(props) {
-  const [productDetails, setProduct] = useState([]);
+  const [productDetails, setProduct] = useState(undefined);
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -14,20 +14,20 @@ export default function ViewDetails(props) {
         setProduct(product)
       })
       .catch((error) => console.log(error))
-  });
+  }, []);
 
   if (!props.user) {
     return <Redirect to="/login" />;
   }
 
-  if (productDetails === []) {
+  if (!productDetails) {
     return <div>Loading...</div>;
   } else {
     let averageRate = 0
-    if (productDetails.reviews?.length != 0) {
-      averageRate = (productDetails.reviews?.reduce((accum, current) => {
+    if (productDetails.reviews.length != 0) {
+      averageRate = (productDetails.reviews.reduce((accum, current) => {
         return current.score + accum
-      }, 0) / productDetails.reviews?.length).toFixed(1)
+      }, 0) / productDetails.reviews.length).toFixed(1)
     }
     return (
       <div className="ProductCard ViewDetails">
@@ -39,7 +39,7 @@ export default function ViewDetails(props) {
           <div className="card-body">
             <h5 className="card-title">{productDetails.name}</h5>
             <p className="card-text">{productDetails.price}€</p>
-            <p className="card-text">{productDetails.user?.name}</p>
+            <p className="card-text">{productDetails.user.name}</p>
             <p className="card-text">{productDetails.description}</p>
             <p className="card-text">Average: {averageRate}</p>
             <Reviews reviews={productDetails.reviews} />
