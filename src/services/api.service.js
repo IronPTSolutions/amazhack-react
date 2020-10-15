@@ -14,3 +14,7 @@ export const getProducts = () => {
 export function getDetail(id) {
   return axios.get(`/detail/${id}`).then((res) => res.data);
 }
+
+export function editProduct(id) {
+  return axios.patch(`/product/${id}`).then((res) => res.data)
+}

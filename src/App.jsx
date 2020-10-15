@@ -38,6 +38,7 @@ function App() {
       <Switch>
         <AuthenticatorRouter path="/products" user={user} render={(props) => <ProductList {...props} user={user} logOut={loggedOut} />} />
         <AuthenticatorRouter path="/detail/:id" user={user} render={(props) => <ProductDetail {...props} user={user} logOut={loggedOut} />} />
+        <AuthenticatorRouter path="/product/:id" user={user} render={(props) => <ProductDetail {...props} user={user} logOut={loggedOut} />} />
 
         <Route path="/login" render={(props) => <Login {...props} user={user} logIn={loggedIn} />} />
 

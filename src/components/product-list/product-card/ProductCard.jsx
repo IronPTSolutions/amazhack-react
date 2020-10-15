@@ -29,7 +29,7 @@ export const ProductCard = React.memo(function ProductCard(props) {
   const textCardContentStyles = useN04TextInfoContentStyles();
   const shadowStyles = useOverShadowStyles({ inactive: true });
   return ( 
-    <Link to={`/detail/${props.id}`} underline='none' props={props.id}>
+    <Link to={`/detail/${props.id}`} underlLine='none' props={props.id}>
     <Card className={cx(styles.root, shadowStyles.root)}>
       <CardMedia
         className={cx(styles.media, mediaStyles.root)}

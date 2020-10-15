@@ -12,7 +12,7 @@ import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import RingLoader from "react-spinners/RingLoader";
 
 import Review from '../reviews/Review';
-import { Avatar, ListItemText } from '@material-ui/core';
+import { Avatar, Button, ListItemText } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -77,15 +77,11 @@ export const ProductDetail = React.memo(function ProductDetail(props) {
   }, []);
 
   
+  const user = props.user.id
+  console.log('user:' , user)
+  const productId = productDetail.user
+  console.log('prodId:' , productId)
   
-  
-
-  // setRevScore(old => {
-  //   revScore = revScore.score.reduce((a,b) =>  a + b)
-  // })
-  
-  
-  // console.log(revScore)
   if (error) {
     return <div>There was an error sending the request</div>;
   }
@@ -123,11 +119,12 @@ export const ProductDetail = React.memo(function ProductDetail(props) {
                   body={productDetail.description}
                 />
                 <hr/>
+                <Button color="inherit" onClick={props.logOut}>Log Out</Button>
                 <div className='d-flex'>
                   <Avatar alt="Remy Sharp" src={productDetail.user.image} />
                   <span className='p-2'>Seller: {productDetail.user.name}</span>
                   <div className='d-flex flex-column justify-content-center text-center'>
-                    <Avatar src="https://upload.wikimedia.org/wikipedia/commons/4/44/Plain_Yellow_Star.png" />
+                    <Avatar className='ml-4' src="https://upload.wikimedia.org/wikipedia/commons/4/44/Plain_Yellow_Star.png" />
                     <span>Rate Media: {revScoresRounded.toFixed(2)}</span>
                   </div>
                 </div>
@@ -135,7 +132,7 @@ export const ProductDetail = React.memo(function ProductDetail(props) {
             </Card>
           </div>
           <div className='col-6'>
-            <h3>Reviews:</h3>
+            <h3 className='text-left'>Reviews:</h3>
             {productDetail.reviews.map(el => {
               return (
                 <div>
