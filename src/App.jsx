@@ -1,17 +1,47 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Login from './components/login/Login';
 import ProductList from './components/product-list/ProductList';
+import AuthenticatorRouter from './components/authenticator/AuthenticatorRouter'
+import Header from './components/header/Header';
+import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
+import ProductDetail from './components/product-list/product-card/ProductDetail';
+
+//TODO: 
+// Alinear todas las tarjetas
+// Usuario detalle
+// Favs
+
+
 
 function App() {
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+
+  const loggedIn = (loggedUser) => {
+    localStorage.setItem('user', JSON.stringify(loggedUser))
+    setUser(loggedUser)
+  }
+
+  const loggedOut = () => {
+    localStorage.removeItem('user')
+    setUser(undefined)
+  }
+
+
   return (
     <div className="App">
-      {/* We want a header that will appear in every screen */}
+     <ScopedCssBaseline />
+      <Header user={user} logOut={loggedOut} />
+
       <Switch>
-        <Route path="/products" component={ProductList} />{" "}
-        {/* We don't wan't non-authenticated users to access the previous route! */}
-        <Route path="/" component={Login} />
+        <AuthenticatorRouter path="/products" user={user} render={(props) => <ProductList {...props} user={user} logOut={loggedOut} />} />
+        <AuthenticatorRouter path="/detail/:id" user={user} render={(props) => <ProductDetail {...props} user={user} logOut={loggedOut} />} />
+        <AuthenticatorRouter path="/product/:id" user={user} render={(props) => <ProductDetail {...props} user={user} logOut={loggedOut} />} />
+
+        <Route path="/login" render={(props) => <Login {...props} user={user} logIn={loggedIn} />} />
+
         <Redirect to="/products" />
       </Switch>
     </div>

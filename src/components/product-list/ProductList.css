@@ -1,5 +1,6 @@
 .ProductList {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 150px 0 150px;
 }
