@@ -1,5 +1,3 @@
-.ProductList {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+.card-group {
+    justify-content: center;
 }

@@ -7,8 +7,17 @@ export const login = (email, password) => {
   return axios.post("/login", { email, password }).then((res) => res.data);
 };
 
+export const getOneProduct = (id) => {
+  return axios
+  .get(`/product/${id}`)
+  .then((response) => response.data)
+  .catch(e => e);
+};
+
 export const getProducts = () => {
   return axios.get("/product").then((res) => res.data);
 };
 
-// Add whatever API calls you need here
+export const logOut = () => {
+  return axios.get("/logout").then((res) => res.data);
+};
